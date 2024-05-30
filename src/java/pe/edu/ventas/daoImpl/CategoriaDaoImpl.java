@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package pe.edu.ventas.daoImpl;
 
 
 import java.util.List;
+import pe.edu.ventas.dao.CategoriaDao;
+import pe.edu.ventas.entity.Categoria;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,14 +17,13 @@ import pe.edu.ventas.config.Conexion;
  *
  * @author ProfCisco
  */
-public class ProductoDaoImpl implements ProductoDao{
+public class CategoriaDaoImpl implements CategoriaDao{
 private PreparedStatement ps;
 private ResultSet rs;
 private Connection cx= null;
     @Override
-    public int create(Producto p) {
+    public int create(Categoria c) {
         int x = 0;
-        String SQL = "insert into producto values(null,?,?,?,?)";
         try {
             x =1;
         } catch (Exception e) {
@@ -35,7 +33,7 @@ private Connection cx= null;
    }
 
     @Override
-    public int update(Producto p) {
+    public int update(Categoria c) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -45,27 +43,24 @@ private Connection cx= null;
     }
 
     @Override
-    public Producto read(int id) {
+    public Categoria read(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Producto> readAll() {
-        List<Producto> lista = new ArrayList<>();
-        String SQL  = "select *from producto";
+    public List<Categoria> readAll() {
+        List<Categoria> lista = new ArrayList<>();
+        String SQL  = "select *from categoria";
         try {
             cx = Conexion.getConexion();
             ps = cx.prepareStatement(SQL);
             rs = ps.executeQuery();
             
             while(rs.next()){
-                Producto p = new Producto();
-                p.setIdproducto(rs.getInt("idproducto"));
-                p.setIdcategoria(rs.getInt("idcategoria"));
-                p.setNombre(rs.getString("nombre"));
-                p.setPrecio(rs.getDouble("precio"));
-                p.setStock(rs.getInt("stock"));
-                lista.add(p);         
+                Categoria c = new Categoria();
+                c.setIdcategoria(rs.getInt("idcategoria"));
+                c.setNombre(rs.getString("nombre"));
+                lista.add(c);         
             }
             
         } catch (SQLException e) {

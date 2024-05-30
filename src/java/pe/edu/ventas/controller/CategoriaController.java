@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package pe.edu.ventas.controller;
 
 import com.google.gson.Gson;
@@ -11,16 +8,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pe.edu.ventas.dao.ProductoDao;
-import pe.edu.ventas.daoImpl.ProductoDaoImpl;
+import pe.edu.ventas.dao.CategoriaDao;
+import pe.edu.ventas.daoImpl.CategoriaDaoImpl;
 
 /**
  *
  * @author ProfCisco
  */
-public class ProductoController extends HttpServlet {
-  private Gson g = new Gson();
-  private ProductoDao pdao = new ProductoDaoImpl();
+public class CategoriaController extends HttpServlet {
+private final CategoriaDao cdao = new CategoriaDaoImpl();
+private final Gson g = new Gson();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,11 +31,10 @@ public class ProductoController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int op = Integer.parseInt(request.getParameter("opcion"));
+        int op = Integer.parseInt(request.getParameter("opc1"));
         switch(op){
-            case 1 -> out.print(g.toJson(pdao.readAll()));
+            case 1 -> out.print(g.toJson(cdao.readAll()));
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
